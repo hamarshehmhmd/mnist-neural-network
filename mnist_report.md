@@ -27,12 +27,12 @@ The neural network uses backpropagation with gradient descent to update the weig
 
 For each layer l (from input to output):
 
-1. Calculate weighted sum:
-   Z^(l) = A^(l-1) · W^(l) + b^(l)
+**1. Calculate weighted sum:**
+<img src="https://render.githubusercontent.com/render/math?math=Z^{(l)} = A^{(l-1)} \cdot W^{(l)} %2B b^{(l)}">
 
-2. Apply activation function:
-   - For hidden layers: A^(l) = sigmoid(Z^(l)) = 1 / (1 + e^(-Z^(l)))
-   - For output layer: A^(output) = softmax(Z^(output)) = e^(Z_i) / Σe^(Z_j)
+**2. Apply activation function:**
+   - For hidden layers: <img src="https://render.githubusercontent.com/render/math?math=A^{(l)} = \frac{1}{1 %2B e^{-Z^{(l)}}}">
+   - For output layer: <img src="https://render.githubusercontent.com/render/math?math=A^{(output)}_i = \frac{e^{Z_i}}{\sum_j e^{Z_j}}">
 
 Where:
 - Z^(l) is the weighted sum for layer l
@@ -42,25 +42,25 @@ Where:
 
 ### Backward Propagation
 
-1. Calculate output layer error:
-   δ^(output) = A^(output) - y
+**1. Calculate output layer error:**
+<img src="https://render.githubusercontent.com/render/math?math=\delta^{(output)} = A^{(output)} - y">
 
-   Where y is the one-hot encoded target vector.
+Where y is the one-hot encoded target vector.
 
-2. Calculate hidden layer error:
-   δ^(l) = (δ^(l+1) · W^(l+1)^T) ⊙ sigmoid_derivative(A^(l))
+**2. Calculate hidden layer error:**
+<img src="https://render.githubusercontent.com/render/math?math=\delta^{(l)} = (\delta^{(l%2B1)} \cdot {W^{(l%2B1)}}^T) \odot A^{(l)} \odot (1-A^{(l)})">
 
-   Where ⊙ represents element-wise multiplication and sigmoid_derivative(A) = A * (1-A)
+Where ⊙ represents element-wise multiplication.
 
-3. Calculate gradients:
-   - dW^(l) = A^(l-1)^T · δ^(l)
-   - db^(l) = sum(δ^(l), axis=0)
+**3. Calculate gradients:**
+   - <img src="https://render.githubusercontent.com/render/math?math=\nabla W^{(l)} = {A^{(l-1)}}^T \cdot \delta^{(l)}">
+   - <img src="https://render.githubusercontent.com/render/math?math=\nabla b^{(l)} = \sum \delta^{(l)}">
 
-4. Update weights and biases:
-   - W^(l) = W^(l) - η * dW^(l)
-   - b^(l) = b^(l) - η * db^(l)
+**4. Update weights and biases:**
+   - <img src="https://render.githubusercontent.com/render/math?math=W^{(l)} = W^{(l)} - \eta \cdot \nabla W^{(l)}">
+   - <img src="https://render.githubusercontent.com/render/math?math=b^{(l)} = b^{(l)} - \eta \cdot \nabla b^{(l)}">
 
-   Where η (eta) is the learning rate.
+Where η (eta) is the learning rate.
 
 ## Expected Results
 

@@ -98,17 +98,43 @@ hidden_sizes = [256, 128, 64]
 
 The network uses backpropagation with gradient descent to update weights:
 
-1. **Forward Pass**:
-   - Z^(l) = A^(l-1) · W^(l) + b^(l)
-   - A^(l) = sigmoid(Z^(l)) for hidden layers
-   - A^(output) = softmax(Z^(output)) for output layer
+### 1. Forward Pass:
 
-2. **Backward Pass**:
-   - Output error: δ^(output) = A^(output) - y
-   - Hidden error: δ^(l) = (δ^(l+1) · W^(l+1)^T) ⊙ sigmoid_derivative(A^(l))
-   - Weight gradients: dW^(l) = A^(l-1)^T · δ^(l)
-   - Bias gradients: db^(l) = sum(δ^(l), axis=0)
-   - Update: W^(l) = W^(l) - η * dW^(l), b^(l) = b^(l) - η * db^(l)
+**Weighted Sum:**
+<img src="https://render.githubusercontent.com/render/math?math=Z^{(l)} = A^{(l-1)} \cdot W^{(l)} %2B b^{(l)}">
+
+**Activation Functions:**
+- Hidden layers (sigmoid): <img src="https://render.githubusercontent.com/render/math?math=A^{(l)} = \frac{1}{1 %2B e^{-Z^{(l)}}}">
+- Output layer (softmax): <img src="https://render.githubusercontent.com/render/math?math=A^{(output)}_i = \frac{e^{Z_i}}{\sum_j e^{Z_j}}">
+
+### 2. Backward Pass:
+
+**Output Layer Error:**
+<img src="https://render.githubusercontent.com/render/math?math=\delta^{(output)} = A^{(output)} - y">
+
+**Hidden Layer Error:**
+<img src="https://render.githubusercontent.com/render/math?math=\delta^{(l)} = (\delta^{(l%2B1)} \cdot {W^{(l%2B1)}}^T) \odot A^{(l)} \odot (1-A^{(l)})">
+
+**Weight Gradients:**
+<img src="https://render.githubusercontent.com/render/math?math=\nabla W^{(l)} = {A^{(l-1)}}^T \cdot \delta^{(l)}">
+
+**Bias Gradients:**
+<img src="https://render.githubusercontent.com/render/math?math=\nabla b^{(l)} = \sum \delta^{(l)}">
+
+**Weight Update:**
+<img src="https://render.githubusercontent.com/render/math?math=W^{(l)} = W^{(l)} - \eta \cdot \nabla W^{(l)}">
+
+**Bias Update:**
+<img src="https://render.githubusercontent.com/render/math?math=b^{(l)} = b^{(l)} - \eta \cdot \nabla b^{(l)}">
+
+Where:
+- Z^(l) is the weighted sum for layer l
+- A^(l) is the activation output for layer l
+- W^(l) are the weights for layer l
+- b^(l) are the biases for layer l
+- δ^(l) is the error term for layer l
+- η (eta) is the learning rate
+- ⊙ represents element-wise multiplication
 
 ## Detailed Documentation
 
