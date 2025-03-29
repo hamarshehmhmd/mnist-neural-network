@@ -101,31 +101,31 @@ The network uses backpropagation with gradient descent to update weights:
 ### 1. Forward Pass:
 
 **Weighted Sum:**
-<img src="https://render.githubusercontent.com/render/math?math=Z^{(l)} = A^{(l-1)} \cdot W^{(l)} %2B b^{(l)}">
+$$Z^{(l)} = A^{(l-1)} \cdot W^{(l)} + b^{(l)}$$
 
 **Activation Functions:**
-- Hidden layers (sigmoid): <img src="https://render.githubusercontent.com/render/math?math=A^{(l)} = \frac{1}{1 %2B e^{-Z^{(l)}}}">
-- Output layer (softmax): <img src="https://render.githubusercontent.com/render/math?math=A^{(output)}_i = \frac{e^{Z_i}}{\sum_j e^{Z_j}}">
+- Hidden layers (sigmoid): $$A^{(l)} = \frac{1}{1 + e^{-Z^{(l)}}}$$
+- Output layer (softmax): $$A^{(output)}_i = \frac{e^{Z_i}}{\sum_j e^{Z_j}}$$
 
 ### 2. Backward Pass:
 
 **Output Layer Error:**
-<img src="https://render.githubusercontent.com/render/math?math=\delta^{(output)} = A^{(output)} - y">
+$$\delta^{(output)} = A^{(output)} - y$$
 
 **Hidden Layer Error:**
-<img src="https://render.githubusercontent.com/render/math?math=\delta^{(l)} = (\delta^{(l%2B1)} \cdot {W^{(l%2B1)}}^T) \odot A^{(l)} \odot (1-A^{(l)})">
+$$\delta^{(l)} = (\delta^{(l+1)} \cdot {W^{(l+1)}}^T) \odot A^{(l)} \odot (1-A^{(l)})$$
 
 **Weight Gradients:**
-<img src="https://render.githubusercontent.com/render/math?math=\nabla W^{(l)} = {A^{(l-1)}}^T \cdot \delta^{(l)}">
+$$\nabla W^{(l)} = {A^{(l-1)}}^T \cdot \delta^{(l)}$$
 
 **Bias Gradients:**
-<img src="https://render.githubusercontent.com/render/math?math=\nabla b^{(l)} = \sum \delta^{(l)}">
+$$\nabla b^{(l)} = \sum \delta^{(l)}$$
 
 **Weight Update:**
-<img src="https://render.githubusercontent.com/render/math?math=W^{(l)} = W^{(l)} - \eta \cdot \nabla W^{(l)}">
+$$W^{(l)} = W^{(l)} - \eta \cdot \nabla W^{(l)}$$
 
 **Bias Update:**
-<img src="https://render.githubusercontent.com/render/math?math=b^{(l)} = b^{(l)} - \eta \cdot \nabla b^{(l)}">
+$$b^{(l)} = b^{(l)} - \eta \cdot \nabla b^{(l)}$$
 
 Where:
 - Z^(l) is the weighted sum for layer l
