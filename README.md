@@ -139,3 +139,5 @@ Where:
 ## Detailed Documentation
 
 A comprehensive report is available in the `mnist_report.md` file. 
+
+This Was done by Mohammad Hamarsheh
